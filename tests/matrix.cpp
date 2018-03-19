@@ -65,7 +65,7 @@ TEST_CASE("operator +")
     REQUIRE( input3 == ostream.str() );
 }
 
-TEST_CASE("operator +")
+TEST_CASE("operator -")
 {
     std::string input1{
         "3, 3\n"
