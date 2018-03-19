@@ -58,7 +58,7 @@ TEST_CASE("operator +")
     REQUIRE( matrix2.read( istream2 ) );
     
     matrix_t matrix;
-    matrix = matrix1 + matsrix2;
+    matrix = matrix1 + matrix2;
     std::ostringstream ostream;
     matrix.write( ostream );
     
@@ -93,7 +93,7 @@ TEST_CASE("operator +")
     REQUIRE( matrix2.read( istream2 ) );
     
     matrix_t matrix;
-    matrix = matrix1 - matsrix2;
+    matrix = matrix1 - matrix2;
     std::ostringstream ostream;
     matrix.write( ostream );
     
@@ -130,12 +130,12 @@ TEST_CASE("operator =")
 
 TEST_CASE("operator *")
 {
-    std::string input_1{
+    std::string input1{
         "3, 3\n"
         "1 1 1\n"
         "1 1 1\n"
         "1 1 1" };
-    std::string input_2{
+    std::string input2{
         "3, 3\n"
         "2 2 2\n"
         "2 2 2\n"
@@ -156,7 +156,7 @@ TEST_CASE("operator *")
     REQUIRE( matrix2.read( istream2 ) );
     
     matrix_t matrix;
-    matrix = matrix1 * matsrix2;
+    matrix = matrix1 * matrix2;
     std::ostringstream ostream;
     matrix.write( ostream );
     
@@ -183,8 +183,8 @@ TEST_CASE("operator +=")
     
    
     matrix_t matrix1,matrix2;
-    std::istringstream istream1{ input_1 };
-    std::istringstream istream2{ input_2 };
+    std::istringstream istream1{ input1 };
+    std::istringstream istream2{ input2 };
     
     REQUIRE( matrix1.read( istream1 ) );
     REQUIRE( matrix2.read( istream2 ) );
@@ -216,8 +216,8 @@ TEST_CASE("operator +=")
     
    
     matrix_t matrix1,matrix2;
-    std::istringstream istream1{ input_1 };
-    std::istringstream istream2{ input_2 };
+    std::istringstream istream1{ input1 };
+    std::istringstream istream2{ input2 };
     
     REQUIRE( matrix1.read( istream1 ) );
     REQUIRE( matrix2.read( istream2 ) );
@@ -231,12 +231,12 @@ TEST_CASE("operator +=")
 
 TEST_CASE("operator *")
 {
-    std::string input_1{
+    std::string input1{
         "3, 3\n"
         "1 1 1\n"
         "1 1 1\n"
         "1 1 1" };
-    std::string input_2{
+    std::string input2{
         "3, 3\n"
         "2 2 2\n"
         "2 2 2\n"
@@ -256,7 +256,7 @@ TEST_CASE("operator *")
     
     REQUIRE( matrix2.read( istream2 ) );
     
-    matrix1 *= matsrix2;
+    matrix1 *= matrix2;
     std::ostringstream ostream;
     matrix1.write( ostream );
     
