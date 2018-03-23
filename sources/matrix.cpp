@@ -110,6 +110,9 @@ matrix_t matrix_t::operator *( matrix_t const & other ) const
 		result.elements_ = new float *[rows_];
 		for (std::size_t i = 0; i < rows_; i++) {
 			result.elements_[i] = new float [other.collumns_];
+			for (std::size_t j = 0; j < other.collumns_; j++){
+				result.elements_[i][j] = 0;
+			}
 		}
 
 		for (std::size_t i = 0; i < rows_; i++) {
@@ -128,25 +131,13 @@ matrix_t matrix_t::operator *( matrix_t const & other ) const
 
 matrix_t & matrix_t::operator -=( matrix_t const & other )
 {
-	if (collumns_ == other.collumns() && rows_ == other.rows()){
-		for (std::size_t i = 0; i < rows_; i++) {	
-	   		for (std::size_t j = 0; j < collumns_; j++) {
-				elements_[i][j] = elements_[i][j] - other.elements_[i][j];
-	    		}
-		}
-	}
+	*this = *this - other;
 	return *this;
 }
 
 matrix_t & matrix_t::operator +=( matrix_t const & other )
 {
-	if (collumns_ == other.collumns() && rows_ == other.rows()){
-		for (std::size_t i = 0; i < rows_; i++) {	
-	   		for (std::size_t j = 0; j < collumns_; j++) {
-				elements_[i][j] = elements_[i][j] + other.elements_[i][j];
-	    		}
-		}
-	}
+	*this = *this + other;
 	return *this;
 }
 
