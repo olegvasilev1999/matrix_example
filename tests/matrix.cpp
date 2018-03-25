@@ -60,7 +60,7 @@ TEST_CASE("operator +")
     
     matrix_t<int> matrix;
 	
-    REQUIRE_NOYHROW(matrix = matrix1 + matrix2);
+    REQUIRE_NOTHROW(matrix = matrix1 + matrix2);
     std::ostringstream ostream;
     matrix.write( ostream );
     
@@ -96,7 +96,7 @@ TEST_CASE("operator -")
     
     matrix_t<int> matrix;
 	
-    REQUIRE_NOYHROW(matrix = matrix1 - matrix2);
+    REQUIRE_NOTHROW(matrix = matrix1 - matrix2);
     std::ostringstream ostream;
     matrix.write( ostream );
     
@@ -159,7 +159,7 @@ TEST_CASE("operator *")
     REQUIRE( matrix2.read( istream2 ) );
     
     matrix_t<int> matrix;
-    REQUIRE_NOYHROW(matrix = matrix1 * matrix2);
+    REQUIRE_NOTHROW(matrix = matrix1 * matrix2);
     std::ostringstream ostream;
     matrix.write( ostream );
     
@@ -194,7 +194,7 @@ TEST_CASE("operator +=")
 	
     REQUIRE( matrix2.read( istream2 ) );
   
-    REQUIRE_NOYHROW(matrix1 += matrix2);
+    REQUIRE_NOTHROW(matrix1 += matrix2);
 	
     std::ostringstream ostream;
     matrix1.write( ostream );
@@ -230,7 +230,7 @@ TEST_CASE("operator -=")
 	
     REQUIRE( matrix2.read( istream2 ) );
   
-    REQUIRE_NOYHROW(matrix1 -= matrix2);
+    REQUIRE_NOTHROW(matrix1 -= matrix2);
 	
     std::ostringstream ostream;
     matrix1.write( ostream );
@@ -265,7 +265,7 @@ TEST_CASE("operator *=")
     
     REQUIRE( matrix2.read( istream2 ) );
     
-    REQUIRE_NOYHROW(matrix1 *= matrix2);
+    REQUIRE_NOTHROW(matrix1 *= matrix2);
 	
     std::ostringstream ostream;
     matrix1.write( ostream );
