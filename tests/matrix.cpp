@@ -283,10 +283,11 @@ TEST_CASE ("tipes"){
 	matrix_t<int> matrix1;
 	matrix_t<double> matrix2;
 	
-	std::istringstream istream{ input };
+	std::istringstream istream1{ input };
+	std::istringstream istream2{ input };
 	
-	REQUIRE( matrix1.read( istream ) );
-	REQUIRE( matrix2.read( istream ) );
+	REQUIRE( matrix1.read( istream1 ) );
+	REQUIRE( matrix2.read( istream2 ) );
 	
 	std::ostringstream ostream;
 	matrix1.write( ostream );
