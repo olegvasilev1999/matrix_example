@@ -5,7 +5,7 @@
 
 TEST_CASE("creating matrix")
 {
-    matrix_t matrix;
+    matrix_t<int> matrix;
     REQUIRE( matrix.rows() == 0 );
     REQUIRE( matrix.collumns() == 0 );
 }
@@ -17,7 +17,7 @@ TEST_CASE("reading matrix")
         "1 1 1\n"
         "2 2 2\n"
         "3 3 3" };
-    matrix_t matrix;
+    matrix_t<int> matrix;
     std::istringstream istream{ input };
     
     REQUIRE( matrix.read( istream ) );
@@ -48,7 +48,8 @@ TEST_CASE("operator +")
         "4 4 4\n"
         "6 6 6" };
     
-    matrix_t matrix1, matrix2;
+    matrix_t<int> matrix1, matrix2;
+	
     std::istringstream istream1{ input1 };
   
     std::istringstream istream2{ input2 };
@@ -57,8 +58,9 @@ TEST_CASE("operator +")
     
     REQUIRE( matrix2.read( istream2 ) );
     
-    matrix_t matrix;
-    matrix = matrix1 + matrix2;
+    matrix_t<int> matrix;
+	
+    REQUIRE_NOYHROW(matrix = matrix1 + matrix2);
     std::ostringstream ostream;
     matrix.write( ostream );
     
@@ -83,7 +85,7 @@ TEST_CASE("operator -")
         "1 1 1\n"
         "2 2 2" };
     
-    matrix_t matrix1, matrix2;
+    matrix_t<int> matrix1, matrix2;
     std::istringstream istream1{ input1 };
   
     std::istringstream istream2{ input2 };
@@ -92,8 +94,9 @@ TEST_CASE("operator -")
     
     REQUIRE( matrix2.read( istream2 ) );
     
-    matrix_t matrix;
-    matrix = matrix1 - matrix2;
+    matrix_t<int> matrix;
+	
+    REQUIRE_NOYHROW(matrix = matrix1 - matrix2);
     std::ostringstream ostream;
     matrix.write( ostream );
     
@@ -107,12 +110,12 @@ TEST_CASE("operator =")
         "1 1 1\n"
         "2 2 2\n"
         "3 3 3" };
-    std::string input2{
+    	std::string input2{
         "3, 3\n"
         "1 1 1\n"
         "1 1 1\n"
         "1 1 1" };
-	matrix_t matrix1, matrix2;
+	matrix_t<int> matrix1, matrix2;
 
 	std::istringstream istream1{ input1 };
 	REQUIRE( matrix1.read( istream1 ) );
@@ -146,7 +149,7 @@ TEST_CASE("operator *")
         "6 6 6\n"
         "6 6 6" };
     
-    matrix_t matrix1, matrix2;
+    matrix_t<int> matrix1, matrix2;
     std::istringstream istream1{ input1 };
   
     std::istringstream istream2{ input2 };
@@ -155,8 +158,8 @@ TEST_CASE("operator *")
     
     REQUIRE( matrix2.read( istream2 ) );
     
-    matrix_t matrix;
-    matrix = matrix1 * matrix2;
+    matrix_t<int> matrix;
+    REQUIRE_NOYHROW(matrix = matrix1 * matrix2);
     std::ostringstream ostream;
     matrix.write( ostream );
     
@@ -182,14 +185,17 @@ TEST_CASE("operator +=")
         "4 4 4" };
     
    
-    matrix_t matrix1,matrix2;
+    matrix_t<int> matrix1,matrix2;
     std::istringstream istream1{ input1 };
+	
     std::istringstream istream2{ input2 };
     
     REQUIRE( matrix1.read( istream1 ) );
+	
     REQUIRE( matrix2.read( istream2 ) );
   
-    matrix1 += matrix2;
+    REQUIRE_NOYHROW(matrix1 += matrix2);
+	
     std::ostringstream ostream;
     matrix1.write( ostream );
     
@@ -215,14 +221,17 @@ TEST_CASE("operator -=")
         "2 2 2" };
     
    
-    matrix_t matrix1,matrix2;
+    matrix_t<int> matrix1,matrix2;
     std::istringstream istream1{ input1 };
+	
     std::istringstream istream2{ input2 };
     
     REQUIRE( matrix1.read( istream1 ) );
+	
     REQUIRE( matrix2.read( istream2 ) );
   
-    matrix1 -= matrix2;
+    REQUIRE_NOYHROW(matrix1 -= matrix2);
+	
     std::ostringstream ostream;
     matrix1.write( ostream );
     
@@ -247,7 +256,7 @@ TEST_CASE("operator *=")
         "6 6 6\n"
         "6 6 6" };
     
-    matrix_t matrix1, matrix2;
+    matrix_t<int> matrix1, matrix2;
     std::istringstream istream1{ input1 };
   
     std::istringstream istream2{ input2 };
@@ -256,9 +265,33 @@ TEST_CASE("operator *=")
     
     REQUIRE( matrix2.read( istream2 ) );
     
-    matrix1 *= matrix2;
+    REQUIRE_NOYHROW(matrix1 *= matrix2);
+	
     std::ostringstream ostream;
     matrix1.write( ostream );
     
     REQUIRE( input3 == ostream.str() );
+}
+
+TEST_CASE ("tipes"){
+	std::string input{
+        "3, 3\n"
+        "1 1 1\n"
+        "2 2 2\n"
+        "3 3 3" };
+	
+	matrix_t<int> matrix1;
+	matrix_t<double> matrix2;
+	
+	std::istringstream istream{ input };
+	
+	REQUIRE( matrix1.read( istream ) );
+	REQUIRE( matrix2.read( istream ) );
+	
+	std::ostringstream ostream;
+	matrix1.write( ostream );
+	ostream << '\n';
+	matrix2.write( ostream );
+	
+	REQUIRE( input + '\n' + input == ostream.str() );
 }
