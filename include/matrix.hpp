@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 
 template <typename T>
 class matrix_t {
@@ -100,7 +101,7 @@ matrix_t<T> matrix_t<T>::operator +( matrix_t const & other ) const
 {
 	
 	if (other.rows_ != rows_ && other.collumns_ != collumns_) {
-		throw "inappropriate sizes of matrixes";
+		throw logic_error("inappropriate sizes of matrixes");
 	}
 	matrix_t result;
 	result.elements_ = new T *[rows_];
@@ -123,7 +124,7 @@ matrix_t<T> matrix_t<T>::operator -( matrix_t const & other ) const
 {
 	matrix_t result;
 	if (other.rows_ != rows_ && other.collumns_ != collumns_) {
-		throw "inappropriate sizes of matrixes";
+		throw logic_error("inappropriate sizes of matrixes");
 	}
 	result.elements_ = new T *[rows_];
 	for (std::size_t i = 0; i < rows_; i++) {
@@ -146,7 +147,7 @@ matrix_t<T> matrix_t<T>::operator *( matrix_t const & other ) const
 {
 	matrix_t result;
 	if (collumns_ != other.rows_){
-		throw "inappropriate sizes of matrixes";
+		throw logic_error("inappropriate sizes of matrixes");
 	}
 	result.elements_ = new T *[rows_];
 	for (std::size_t i = 0; i < rows_; i++) {
